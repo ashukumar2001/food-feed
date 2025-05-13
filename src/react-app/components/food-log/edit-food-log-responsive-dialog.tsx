@@ -162,6 +162,7 @@ export function EditFoodLogResponsiveDialog({
           <Input
             id="calories"
             type="number"
+            step="any"
             value={newCalories}
             onChange={(e) => setNewCalories(Number(e.target.value))}
             min={0}
@@ -176,6 +177,7 @@ export function EditFoodLogResponsiveDialog({
           <Input
             id="protein"
             type="number"
+            step="any"
             value={newProtein}
             onChange={(e) => setNewProtein(Number(e.target.value))}
             min={0}
@@ -190,6 +192,7 @@ export function EditFoodLogResponsiveDialog({
           <Input
             id="carbs"
             type="number"
+            step="any"
             value={newCarbs}
             onChange={(e) => setNewCarbs(Number(e.target.value))}
             min={0}
@@ -204,6 +207,7 @@ export function EditFoodLogResponsiveDialog({
           <Input
             id="fat"
             type="number"
+            step="any"
             value={newFat}
             onChange={(e) => setNewFat(Number(e.target.value))}
             min={0}

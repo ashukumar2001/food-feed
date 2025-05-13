@@ -1,8 +1,5 @@
 import * as React from "react";
-import {
-  RiGithubFill,
-  // RiGoogleFill,
-} from "@remixicon/react";
+import { RiGithubFill, RiGoogleFill } from "@remixicon/react";
 import { cn } from "@/lib/utils";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { Button } from "@/components/ui/button";
@@ -69,7 +66,14 @@ export function GetStartedButton() {
 function SignInForm({ className }: React.ComponentProps<"form">) {
   return (
     <div className={cn("flex", className)}>
-      {/* <Button variant="outline">
+      <Button
+        onClick={() =>
+          authClient.signIn.social({
+            provider: "google",
+          })
+        }
+        variant="outline"
+      >
         <RiGoogleFill
           className="me-3 text-[#DB4437] dark:text-white/60"
           size={16}
@@ -77,7 +81,7 @@ function SignInForm({ className }: React.ComponentProps<"form">) {
         />
         Login with Google
       </Button>
-      <Button variant="outline">
+      {/* <Button variant="outline">
         <RiTwitterXFill
           className="me-3 text-[#14171a] dark:text-white/60"
           size={16}

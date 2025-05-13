@@ -181,6 +181,7 @@ export function FoodLogForm({ onSuccess, className }: FoodLogFormProps) {
           <Input
             id="calories"
             type="number"
+            step="any"
             placeholder="Calories"
             {...register("calories", { valueAsNumber: true })}
             className={errors.calories ? "border-destructive" : ""}
@@ -199,6 +200,7 @@ export function FoodLogForm({ onSuccess, className }: FoodLogFormProps) {
           <Input
             id="protein"
             type="number"
+            step="any"
             placeholder="Protein (g)"
             {...register("protein", { valueAsNumber: true })}
             className={errors.protein ? "border-destructive" : ""}
@@ -217,6 +219,7 @@ export function FoodLogForm({ onSuccess, className }: FoodLogFormProps) {
           <Input
             id="carbs"
             type="number"
+            step="any"
             placeholder="Carbs (g)"
             {...register("carbs", { valueAsNumber: true })}
             className={errors.carbs ? "border-destructive" : ""}
@@ -235,6 +238,7 @@ export function FoodLogForm({ onSuccess, className }: FoodLogFormProps) {
           <Input
             id="fat"
             type="number"
+            step="any"
             placeholder="Fat (g)"
             {...register("fat", { valueAsNumber: true })}
             className={errors.fat ? "border-destructive" : ""}
