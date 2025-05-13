@@ -3,6 +3,7 @@ import { publicProcedure, router } from "../trpc";
 import { TRPCError } from "@trpc/server";
 import { auth } from "../lib/auth";
 import { analyzeFoodMacros } from "../lib/ai-analyzer";
+import { DateTime } from "luxon";
 
 // Input validation schema for analyzing food description
 const analyzeInputSchema = z.object({
@@ -300,7 +301,8 @@ export const foodRouter = router({
 
     // Get daily calorie summary
     getDailySummary: publicProcedure
-        .query(async ({ ctx }) => {
+        .input(z.object({ timezone: z.string().default('Asia/Calcutta') }))
+        .query(async ({ ctx, input: { timezone } }) => {
             const session = await auth.api.getSession(ctx.workerContext.req.raw);
 
             if (!session) {
@@ -309,14 +311,11 @@ export const foodRouter = router({
                     message: "You must be logged in to view daily summary"
                 });
             }
-
             try {
-                // Get today's date range
-                const today = new Date();
-                today.setHours(0, 0, 0, 0);
-                const tomorrow = new Date(today);
-                tomorrow.setDate(tomorrow.getDate() + 1);
-
+                // Calculate start and end of today in user's timezone
+                const now = DateTime.now().setZone(timezone);
+                const startOfDay = now.startOf('day');
+                const endOfDay = startOfDay.plus({ days: 1 });
                 // Get all food logs for today
                 const { results } = await ctx.workerContext.env.DB.prepare(`
                     SELECT * FROM food_logs
@@ -325,8 +324,8 @@ export const foodRouter = router({
                     AND timestamp < ?
                 `).bind(
                     session.user.id,
-                    today.getTime(),
-                    tomorrow.getTime()
+                    startOfDay.toMillis(),
+                    endOfDay.toMillis()
                 ).all();
 
                 // Calculate total macros
@@ -336,7 +335,7 @@ export const foodRouter = router({
                 const totalFat = results.reduce((sum, log) => sum + Number(log.fat || 0), 0);
 
                 return {
-                    date: today.toISOString(),
+                    date: startOfDay.toISO(),
                     totalCalories,
                     totalProtein,
                     totalCarbs,

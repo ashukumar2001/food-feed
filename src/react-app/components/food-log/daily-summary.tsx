@@ -11,7 +11,10 @@ export function DailySummary() {
     error,
   } = useQuery({
     queryKey: ["dailySummary"],
-    queryFn: () => trpcClient.food.getDailySummary.query(),
+    queryFn: () =>
+      trpcClient.food.getDailySummary.query({
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      }),
   });
 
   if (isLoading) {
