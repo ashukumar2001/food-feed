@@ -1,0 +1,27 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Frontend Structure Guide
+
+The frontend is located in [src/react-app/](mdc:src/react-app) and is built with React and Vite.
+
+## Main Components
+- [components/food-log/](mdc:src/react-app/components/food-log): Contains the main calorie tracker UI:
+  - [food-log-form.tsx](mdc:src/react-app/components/food-log/food-log-form.tsx): Form for adding food entries and estimating calories via AI
+  - [food-log-list.tsx](mdc:src/react-app/components/food-log/food-log-list.tsx): Displays the list of food logs, allows editing and deleting
+  - [daily-summary.tsx](mdc:src/react-app/components/food-log/daily-summary.tsx): Shows the daily total calories and log count
+  - [index.tsx](mdc:src/react-app/components/food-log/index.tsx): Composes the main CalorieTracker component
+
+## Routing
+- [routes/calories.tsx](mdc:src/react-app/routes/calories.tsx): Route for the calorie tracker page, renders the CalorieTracker
+
+## API Communication
+- [lib/trpc-client.ts](mdc:src/react-app/lib/trpc-client.ts): Sets up the tRPC client for calling backend endpoints
+
+## UI Library
+- Uses shadcn/ui components (see [components/ui/](mdc:src/react-app/components/ui)) for consistent, accessible UI elements
+
+## Styling
+- Tailwind CSS is used for utility-first styling (see [index.css](mdc:src/react-app/index.css))

@@ -1,0 +1,17 @@
+---
+description: list of API enpoints and their description
+globs: 
+alwaysApply: false
+---
+# API Endpoints Guide
+
+The backend exposes the following main endpoints for the calorie tracker, implemented in @src/worker/routes/food.ts:
+
+- `analyze` (query): Estimates calories from a food description using Cloudflare Workers AI
+- `createFoodLog` (mutation): Adds a new food log entry
+- `getFoodLogs` (query): Retrieves all food logs for the current user
+- `updateFoodLog` (mutation): Updates the calories for a food log
+- `deleteFoodLog` (mutation): Deletes a food log
+- `getDailySummary` (query): Returns the total calories and log count for the current day
+
+These endpoints are accessed from the frontend via tRPC (see [trpc-client.ts](mdc:src/react-app/lib/trpc-client.ts)).

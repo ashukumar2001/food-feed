@@ -1,0 +1,21 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Backend Structure Guide
+
+The backend is located in [src/worker/](mdc:src/worker) and runs on Cloudflare Workers using Hono and tRPC.
+
+## Main API Routes
+- [routes/calories.ts](mdc:src/worker/routes/calories.ts): Handles food log CRUD operations and calorie estimation via AI
+- [routes/index.ts](mdc:src/worker/routes/index.ts): Combines all API routes into the main appRouter
+
+## Database
+- [db/schema.ts](mdc:src/worker/db/schema.ts): Defines the schema for food logs (MVP may use in-memory or SQLite via Drizzle)
+
+## AI Integration
+- The `analyze` endpoint in [calories.ts](mdc:src/worker/routes/calories.ts) uses Cloudflare Workers AI to estimate calories from food descriptions
+
+## Auth
+- [lib/auth.ts](mdc:src/worker/lib/auth.ts): Handles authentication/session logic (may be stubbed or optional for MVP)

@@ -1,0 +1,31 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Project Structure Guide
+
+This project is an AI-powered calorie tracker web application. It uses React (with Vite) for the frontend, Hono and tRPC on Cloudflare Workers for the backend, and integrates with Cloudflare Workers AI for calorie estimation.
+
+## Main Directories
+
+- [src/react-app/](mdc:src/react-app): Frontend React application
+  - [components/food-log/](mdc:src/react-app/components/food-log): Main calorie tracker UI (form, list, daily summary)
+  - [lib/trpc-client.ts](mdc:src/react-app/lib/trpc-client.ts): tRPC client for API communication
+  - [routes/calories.tsx](mdc:src/react-app/routes/calories.tsx): Route for the calorie tracker page
+- [src/worker/](mdc:src/worker): Cloudflare Worker backend
+  - [routes/calories.ts](mdc:src/worker/routes/calories.ts): Main API logic for food logs and AI calorie estimation
+  - [routes/index.ts](mdc:src/worker/routes/index.ts): Combines all API routes
+  - [db/schema.ts](mdc:src/worker/db/schema.ts): Database schema for food logs
+  - [lib/auth.ts](mdc:src/worker/lib/auth.ts): Auth/session logic (MVP may not require auth)
+
+## Key Flow
+
+1. User enters food details in the [FoodLogForm](mdc:src/react-app/components/food-log/food-log-form.tsx).
+2. The description is sent to the backend via tRPC ([trpc-client.ts](mdc:src/react-app/lib/trpc-client.ts)), which calls the [analyze](mdc:src/worker/routes/calories.ts) endpoint.
+3. The backend uses Cloudflare Workers AI to estimate calories and returns the result.
+4. The food log is saved and displayed in the [FoodLogList](mdc:src/react-app/components/food-log/food-log-list.tsx) and [DailySummary](mdc:src/react-app/components/food-log/daily-summary.tsx).
+
+## Additional References
+- [README.md](mdc:README.md): Project setup and development instructions
+- [PRD for FoodFeed MVP.markdown](mdc:PRD for FoodFeed MVP.markdown): Product requirements and feature scope
