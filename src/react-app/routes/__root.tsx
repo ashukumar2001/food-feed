@@ -1,3 +1,4 @@
+import { ThemeProvider } from "@/components/theme-provider";
 import { Outlet, createRootRoute } from "@tanstack/react-router";
 
 export const Route = createRootRoute({
@@ -6,8 +7,10 @@ export const Route = createRootRoute({
 
 function RootComponent() {
   return (
-    <main className="min-h-dvh">
-      <Outlet />
-    </main>
+    <ThemeProvider defaultTheme="system" storageKey="foodfeed-ui-theme">
+      <main className="min-h-dvh">
+        <Outlet />
+      </main>
+    </ThemeProvider>
   );
 }

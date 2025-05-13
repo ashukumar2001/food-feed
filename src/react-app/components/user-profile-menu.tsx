@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { authClient } from "@/lib/auth-client";
 import { useNavigate } from "@tanstack/react-router";
+import { ModeToggle } from "./mode-toggle";
 
 export function UserProfileMenu({ user }: { user: User }) {
   const navigate = useNavigate();
@@ -50,6 +51,10 @@ export function UserProfileMenu({ user }: { user: User }) {
           >
             <LogOut />
             Logout
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem asChild>
+            <ModeToggle />
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>
