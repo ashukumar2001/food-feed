@@ -102,7 +102,9 @@ export function FoodLogList({ foodLogs }: FoodLogListProps) {
             <CardHeader className="pb-2">
               <CardTitle className="text-lg flex justify-between items-start">
                 <span>{log.name}</span>
-                <span className="text-xl font-bold">{log.calories} kcal</span>
+                <span className="text-xl font-bold">
+                  {log.calories?.toFixed(1) || 0} kcal
+                </span>
               </CardTitle>
               <div className="text-sm text-muted-foreground flex items-center justify-between">
                 <span>{formatLogTime(log.timestamp)}</span>
@@ -115,9 +117,9 @@ export function FoodLogList({ foodLogs }: FoodLogListProps) {
             <CardContent className="pb-2">
               <p className="text-sm">{log.description}</p>
               <div className="flex gap-3 mt-2 text-sm text-muted-foreground">
-                <div>Protein: {log.protein || 0}g</div>
-                <div>Carbs: {log.carbs || 0}g</div>
-                <div>Fat: {log.fat || 0}g</div>
+                <div>Protein: {log.protein?.toFixed(1) || 0}g</div>
+                <div>Carbs: {log.carbs?.toFixed(1) || 0}g</div>
+                <div>Fat: {log.fat?.toFixed(1) || 0}g</div>
               </div>
             </CardContent>
 

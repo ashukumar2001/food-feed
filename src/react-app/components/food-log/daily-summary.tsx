@@ -52,7 +52,7 @@ export function DailySummary() {
         <div className="grid grid-cols-2 gap-4 mb-4">
           <div className="text-center">
             <p className="text-3xl font-bold text-primary">
-              {summary?.totalCalories || 0}
+              {summary?.totalCalories?.toFixed(1) || 0}&nbsp;kcal
             </p>
             <p className="text-sm text-muted-foreground">Total Calories</p>
           </div>
@@ -64,15 +64,21 @@ export function DailySummary() {
 
         <div className="grid grid-cols-3 gap-2 text-center">
           <div>
-            <p className="text-lg font-medium">{summary?.totalProtein || 0}g</p>
+            <p className="text-lg font-medium">
+              {summary?.totalProtein?.toFixed(1) || 0}&nbsp;g
+            </p>
             <p className="text-xs text-muted-foreground">Protein</p>
           </div>
           <div>
-            <p className="text-lg font-medium">{summary?.totalCarbs || 0}g</p>
+            <p className="text-lg font-medium">
+              {summary?.totalCarbs?.toFixed(1) || 0}&nbsp;g
+            </p>
             <p className="text-xs text-muted-foreground">Carbs</p>
           </div>
           <div>
-            <p className="text-lg font-medium">{summary?.totalFat || 0}g</p>
+            <p className="text-lg font-medium">
+              {summary?.totalFat?.toFixed(1) || 0}&nbsp;g
+            </p>
             <p className="text-xs text-muted-foreground">Fat</p>
           </div>
         </div>
