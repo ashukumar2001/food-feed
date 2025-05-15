@@ -146,7 +146,7 @@ export function FoodLogsWithTabs() {
                     <CardTitle className="text-lg flex justify-between items-start">
                       <span>{daily.formattedDay}</span>
                       <span className="text-xl font-bold">
-                        {daily.totalCalories} kcal
+                        {daily.totalCalories?.toFixed(1) || 0} kcal
                       </span>
                     </CardTitle>
                   </CardHeader>
@@ -160,7 +160,7 @@ export function FoodLogsWithTabs() {
                       </div>
                       <div className="text-center">
                         <p className="text-lg font-medium">
-                          {daily.totalCalories}
+                          {daily.totalCalories?.toFixed(1) || 0}
                         </p>
                         <p className="text-xs text-muted-foreground">
                           Calories
@@ -170,18 +170,20 @@ export function FoodLogsWithTabs() {
                     <div className="grid grid-cols-3 gap-2 text-center">
                       <div>
                         <p className="text-sm font-medium">
-                          {daily.totalProtein}g
+                          {daily.totalProtein?.toFixed(1) || 0}g
                         </p>
                         <p className="text-xs text-muted-foreground">Protein</p>
                       </div>
                       <div>
                         <p className="text-sm font-medium">
-                          {daily.totalCarbs}g
+                          {daily.totalCarbs?.toFixed(1) || 0}g
                         </p>
                         <p className="text-xs text-muted-foreground">Carbs</p>
                       </div>
                       <div>
-                        <p className="text-sm font-medium">{daily.totalFat}g</p>
+                        <p className="text-sm font-medium">
+                          {daily.totalFat?.toFixed(1) || 0}g
+                        </p>
                         <p className="text-xs text-muted-foreground">Fat</p>
                       </div>
                     </div>
