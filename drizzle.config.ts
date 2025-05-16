@@ -3,7 +3,10 @@ import dotenv from "dotenv";
 
 import fs from "node:fs";
 import path from "node:path";
+
 dotenv.config({ path: process.env.CLOUDFLARE_ENV === "production" ? ".dev.vars.production" : ".dev.vars.dev" });
+
+console.log(process.env.CLOUDFLARE_ENV);
 const getLocalD1 = () => {
     try {
         const basePath = path.resolve('.wrangler');
@@ -45,6 +48,7 @@ const getDbConfiguration = () => {
 };
 
 const dbCredentials = getDbConfiguration();
+console.log(dbCredentials);
 export default {
     out: "./src/worker/drizzle",
     schema: "./src/worker/db/schema.ts",

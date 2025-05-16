@@ -5,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import { FoodLogList } from "./food-log-list";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Loader2 } from "lucide-react";
+import AnalyticsPage from "../analytics";
 
 interface FoodLog {
   id: string;
@@ -107,10 +108,11 @@ export function FoodLogsWithTabs() {
   return (
     <div className="space-y-4">
       <Tabs defaultValue="today" className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
+        <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="today">Today</TabsTrigger>
           <TabsTrigger value="yesterday">Yesterday</TabsTrigger>
           <TabsTrigger value="month">Month</TabsTrigger>
+          <TabsTrigger value="analytics">Analytics</TabsTrigger>
         </TabsList>
 
         <TabsContent value="today" className="mt-4">
@@ -196,6 +198,9 @@ export function FoodLogsWithTabs() {
               No food logs for this month.
             </div>
           )}
+        </TabsContent>
+        <TabsContent value="analytics" className="mt-4">
+          <AnalyticsPage />
         </TabsContent>
       </Tabs>
     </div>

@@ -19,7 +19,7 @@ export const macrosSchema = z.object({
  */
 export async function analyzeFoodMacros(env: Env, name: string, description: string) {
     const workersai = createWorkersAI({ binding: env.AI });
-    const prompt = `Analyze the following food and estimate the macros (calories, protein, carbs, fat) in grams. Return only numbers.\nFood name: ${name}\nDescription: ${description}`;
+    const prompt = `Analyze the following food and estimate the macros (calories in Kcal and protein, carbs, fat are in grams). Return only numbers.\nFood name: ${name}\nDescription: ${description}`;
 
     const result = await generateObject({
         model: workersai("@cf/meta/llama-3.1-8b-instruct"),
@@ -31,6 +31,5 @@ export async function analyzeFoodMacros(env: Env, name: string, description: str
             fat: z.number(),
         }),
     });
-
     return result.object;
 } 

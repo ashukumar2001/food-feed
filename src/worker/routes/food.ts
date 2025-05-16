@@ -32,6 +32,21 @@ const updateFoodLogSchema = z.object({
     timestamp: z.string().optional() // Optional ISO timestamp string
 });
 
+// Define FoodLog type
+export type FoodLog = {
+    id: string;
+    name: string;
+    description: string;
+    calories: number;
+    protein: number;
+    carbs: number;
+    fat: number;
+    timestamp: string; // ISO string
+    userId: string;
+    createdAt: string; // ISO string
+    updatedAt: string; // ISO string
+};
+
 export const foodRouter = router({
     // Analyze food description using AI to estimate calories
     analyze: publicProcedure
@@ -61,10 +76,10 @@ export const foodRouter = router({
 
                 // Return fallback values if all attempts fail
                 return {
-                    calories: 100,
-                    protein: 5,
-                    carbs: 15,
-                    fat: 3
+                    calories: 0,
+                    protein: 0,
+                    carbs: 0,
+                    fat: 0
                 };
             } catch (error) {
                 console.error("Error estimating calories:", error);
@@ -156,11 +171,18 @@ export const foodRouter = router({
                 `).bind(session.user.id).all();
 
                 // Convert timestamp to Date objects
-                const logs = results.map((log: any) => ({
-                    ...log,
+                const logs: FoodLog[] = results.map((log) => ({
+                    id: String(log.id),
+                    name: String(log.name),
+                    description: String(log.description),
+                    calories: Number(log.calories),
+                    protein: Number(log.protein),
+                    carbs: Number(log.carbs),
+                    fat: Number(log.fat),
                     timestamp: new Date(Number(log.timestamp)).toISOString(),
+                    userId: String(log.user_id),
                     createdAt: new Date(Number(log.created_at)).toISOString(),
-                    updatedAt: new Date(Number(log.updated_at)).toISOString()
+                    updatedAt: new Date(Number(log.updated_at)).toISOString(),
                 }));
 
                 return logs;
