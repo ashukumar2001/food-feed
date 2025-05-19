@@ -155,7 +155,6 @@ export const foodRouter = router({
     getFoodLogs: publicProcedure
         .query(async ({ ctx }) => {
             const session = await auth.api.getSession(ctx.workerContext.req.raw);
-
             if (!session) {
                 throw new TRPCError({
                     code: "UNAUTHORIZED",
